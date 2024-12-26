@@ -31,7 +31,9 @@ async function fetchAndDisplayCSV(url, container) {
     const headerRow = document.createElement('tr');
     headerRow.className = 'header-row';
     const headerCell = document.createElement('td');
-    headerCell.colSpan = 2;
+    const columnCount = rows[1]?.length || 2; // Get the number of columns (default to 2)
+    headerCell.colSpan = columnCount; // Merge cells based on column count
+    //headerCell.colSpan = 2;
     headerCell.textContent = rows[0][0];
     headerRow.appendChild(headerCell);
     table.appendChild(headerRow);
