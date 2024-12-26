@@ -1,36 +1,33 @@
+
 const csvUrls = {
   english: [
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pubhtml?gid=1465302100&single=true',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=1465302100&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=1102806551&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=1646285666&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=598018975&single=true&output=csv'
-  ],  
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=598018975&single=true&output=csv',
+  ],
   punjabi: [
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=1123996902&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=1674564694&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=763432794&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=1908107751&single=true&output=csv'
-  ]
-    
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTiSi2gAvTMHzG_qazChse6NPFZDTKEFbJ5OgW1F5xEf5JjobUOEDUgurGZfghaLvbR8YbLgybuwtaK/pub?gid=1908107751&single=true&output=csv',
+  ],
 };
 
 async function fetchAndDisplayCSV(url, container) {
   try {
     const response = await fetch(url);
-    console.log(`Response status for ${url}:`, response.status);
+
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error(`Failed to fetch CSV from ${url}: ${response.statusText}`);
     }
 
     const csvText = await response.text();
-    console.log(`CSV content for ${url}:`, csvText);
-
-    // Parse CSV data
-    const rows = csvText.split('\n').map(row => row.split(','));
+    const rows = csvText.trim().split('\n').map(row => row.split(','));
 
     const table = document.createElement('table');
 
-    // Add header row with merged cells
+    // Add header
     const headerRow = document.createElement('tr');
     headerRow.className = 'header-row';
     const headerCell = document.createElement('td');
@@ -39,52 +36,39 @@ async function fetchAndDisplayCSV(url, container) {
     headerRow.appendChild(headerCell);
     table.appendChild(headerRow);
 
-    // Add the rest of the rows
+    // Add data rows
     rows.slice(1).forEach(row => {
-      if (row.length >= 2) {
-        const tr = document.createElement('tr');
-        const td1 = document.createElement('td');
-        const td2 = document.createElement('td');
-        td1.textContent = row[0];
-        td2.textContent = row[1];
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        table.appendChild(tr);
-      }
+      const tr = document.createElement('tr');
+      row.forEach(cell => {
+        const td = document.createElement('td');
+        td.textContent = cell.trim();
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
     });
 
-    // Append the table to the container
     container.appendChild(table);
   } catch (error) {
-    console.error('Error fetching or parsing CSV:', error);
+    console.error('Error:', error);
   }
 }
 
-// Function to load all tables for a given language
 async function loadTables(language) {
   const container = document.getElementById('tables-container');
-  container.innerHTML = ''; // Clear existing tables
+  container.innerHTML = '';
 
   for (const url of csvUrls[language]) {
     await fetchAndDisplayCSV(url, container);
   }
 }
 
-// Function to switch language and update button styles
 function switchLanguage(language) {
-  const englishButton = document.getElementById('english-button');
-  const punjabiButton = document.getElementById('punjabi-button');
+  document.querySelectorAll('.toggle-button').forEach(button => {
+    button.classList.remove('selected');
+  });
 
-  if (language === 'english') {
-    englishButton.classList.add('selected');
-    punjabiButton.classList.remove('selected');
-  } else {
-    punjabiButton.classList.add('selected');
-    englishButton.classList.remove('selected');
-  }
-
+  document.getElementById(`${language}-button`).classList.add('selected');
   loadTables(language);
 }
 
-// Load the default English tables on page load
 loadTables('english');
