@@ -5,12 +5,14 @@ const csvUrls = {
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=505204058&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=496992164&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=1933166340&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=1137886951&single=true&output=csv',
   ],
   punjabi: [
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=1335764588&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=386898595&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=22693599&single=true&output=csv',
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=84556561&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTc5RkM1l70DjJC13Hr3S8sXNm6fKcOpJdDo4vg0WvmmXRfrYxY3Q6XQNH4ltmM_Jh8hstlPmW5NPA7/pub?gid=285271324&single=true&output=csv',
   ],
 };
 
