@@ -46,7 +46,7 @@ async function fetchAndDisplayCSV(url, container) {
       row.forEach(cell => {
         const td = document.createElement('td');
         td.textContent = cell.trim();
-        td.style.fontSize = '1.2em';  // Add font size
+        td.style.fontSize = '1.0em';  // Add font size
         td.style.fontWeight = 'bold'; // Add bold
         tr.appendChild(td);
       });
