@@ -28,12 +28,23 @@ async function fetchAndDisplayCSV(url, container) {
     const rows = csvText.trim().split('\n').map(row => row.split(','));
 
     const table = document.createElement('table');
+    const colgroup = document.createElement('colgroup');
+
+    // Define fixed column widths (adjust as necessary)
+    const columnCount = rows[1]?.length || 2;
+    const fixedWidth = `${100 / columnCount}%`; // Distribute evenly across all columns
+    for (let i = 0; i < columnCount; i++) {
+      const col = document.createElement('col');
+      col.style.width = fixedWidth;
+      colgroup.appendChild(col);
+    }
+    table.appendChild(colgroup);
 
     // Add header
     const headerRow = document.createElement('tr');
     headerRow.className = 'header-row';
     const headerCell = document.createElement('td');
-    const columnCount = rows[1]?.length || 2; // Get the number of columns (default to 2)
+    //const columnCount = rows[1]?.length || 2; // Get the number of columns (default to 2)
     headerCell.colSpan = columnCount; // Merge cells based on column count
     //headerCell.colSpan = 2;
     headerCell.textContent = rows[0][0];
@@ -48,6 +59,9 @@ async function fetchAndDisplayCSV(url, container) {
         td.textContent = cell.trim();
         td.style.fontSize = '0.8em';  // Add font size
         td.style.fontWeight = 'bold'; // Add bold
+        td.style.wordWrap = 'break-word'; // Force wrapping of long words
+        td.style.wordBreak = 'break-word'; // Break long words if necessary
+        td.style.whiteSpace = 'normal'; // Allow text wrapping
         tr.appendChild(td);
       });
       table.appendChild(tr);
