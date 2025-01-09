@@ -28,8 +28,6 @@ async function fetchAndDisplayCSV(url, container) {
     const rows = csvText.trim().split('\n').map(row => row.split(','));
 
     const table = document.createElement('table');
-    table.style.width = '95%';  // Make table width 95% of container
-    table.style.margin = '0 auto';  // Center the table horizontally
 
     // Add header
     const headerRow = document.createElement('tr');
