@@ -56,3 +56,8 @@ th, td {
   padding: 12px;
   font-size: 1.2em;
 }
+
+table {
+  width: 95%;
+  margin: 0 auto;  /* Centers the table */
+}
