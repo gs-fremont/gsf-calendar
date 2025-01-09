@@ -29,7 +29,9 @@ body {
 
 .table-container {
   margin: 20px auto;
-  width: 80%;
+  width: 100%;
+  max-width: 100%; /* Prevents horizontal scrolling */
+  box-sizing: border-box; /* Includes padding in width calculation */
 }
 
 table {
@@ -55,9 +57,4 @@ th, td {
 .header-row td {
   padding: 12px;
   font-size: 1.2em;
-}
-
-table {
-  width: 95%;
-  margin: 0 auto;  /* Centers the table */
 }
